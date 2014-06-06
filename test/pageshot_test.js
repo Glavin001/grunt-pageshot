@@ -27,6 +27,7 @@ exports.pageshot = {
     // setup here if necessary
     done();
   },
+  /*
   default_options: function (test) {
     test.expect(1);
 
@@ -36,13 +37,16 @@ exports.pageshot = {
 
     test.done();
   },
+  */
   custom_options: function (test) {
-    test.expect(1);
+    test.expect(6);
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    for (var i=1; i<6; i++) {
+      test.ok(grunt.file.exists('tmp/screenshot'+i+'.png'), 'Screenshot '+i+' should have been created.');
+    }
 
+    test.ok(grunt.file.exists('tmp/quitting.png'), 'Last screenshot before quitting should have been created.');
+    
     test.done();
   }
 };

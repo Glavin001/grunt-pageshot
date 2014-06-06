@@ -14,6 +14,10 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    config: {
+        port: 9001,
+    },
+
     jshint: {
       all: [
         'Gruntfile.js',
@@ -31,22 +35,29 @@ module.exports = function (grunt) {
       tests: ['tmp']
     },
 
+    // Web Server, used for testing
+    connect: {
+      server: {
+        options: {
+          port: '<%= config.port %>',
+          base: 'test'
+        }
+      }
+    },
+
     // Configuration to be run (and then tested).
     pageshot: {
+      /*
       default_options: {
         options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
         }
       },
+      */
       custom_options: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          url: 'http://localhost:<%= config.port %>/ticker.html',
+          conf: 'test/ticker_conf.js',
+          output: 'tmp'
         }
       }
     },
@@ -63,7 +74,7 @@ module.exports = function (grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'pageshot', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'connect', 'pageshot', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

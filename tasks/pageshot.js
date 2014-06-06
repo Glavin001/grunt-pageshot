@@ -9,6 +9,7 @@
 'use strict';
 
 var pageshot = require('pageshot');
+var chalk = require('chalk');
 
 module.exports = function (grunt) {
 
@@ -16,38 +17,36 @@ module.exports = function (grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('pageshot', 'Automate your screenshots with Pageshot.', function () {
+    var done = this.async();
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+      url: '',
+      conf: '',
+      output: '',
+      quite: false
     });
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function (file) {
-      // Concat specified files.
-      var src = file.src.filter(function (filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
+    // Start Pageshot
+    var p = pageshot(options.url, options.conf, options.output);
+
+    // Print out live events
+    if (options.quite) {
+      p.on('didShoot', function(options, successful) {
+        var title = '"' + options.name + '.' + options.format + '" with ' + options.quality + ' quality.';
+
+        if (successful) {
+          console.log(chalk.green('\n✔ ' + 'Successfully generated '+title));
         } else {
-          return true;
+          console.log(chalk.red('\n✘ ' + 'Failed to generate '+title));
         }
-      }).map(function (filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+      });
+    }
 
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(file.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + file.dest + '" created.');
+    p.on('didQuit', function() {
+      done();
     });
+
   });
 
 };
