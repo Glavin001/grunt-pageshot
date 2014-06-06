@@ -1,6 +1,6 @@
 {
   "name": "grunt-pageshot",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Automate your screenshots with Pageshot.",
   "homepage": "https://github.com/Glavin001/grunt-pageshot",
   "repository": "git@github.com:Glavin001/grunt-pageshot.git",
@@ -30,7 +30,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "pageshot": "^0.1.1",
+    "pageshot": "^0.2.0",
     "chalk": "^0.4.0"
   }
 }

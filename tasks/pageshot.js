@@ -24,11 +24,19 @@ module.exports = function (grunt) {
       url: '',
       conf: '',
       output: '',
-      quite: false
+      quite: false,
+      viewportSize: {
+        width: 480,
+        height: 800
+      }
     });
 
+    var opts = {
+      viewportSize: options.viewportSize
+    };
+
     // Start Pageshot
-    var p = pageshot(options.url, options.conf, options.output);
+    var p = pageshot(options.url, options.conf, options.output, opts);
 
     // Print out live events
     if (!options.quite) {
