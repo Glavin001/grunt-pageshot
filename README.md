@@ -1,4 +1,4 @@
-# [grunt-pageshot](https://github.com/Glavin001/grunt-pageshot)
+# [grunt-pageshot](https://github.com/Glavin001/grunt-pageshot) [![Build Status](https://travis-ci.org/Glavin001/grunt-pageshot.svg?branch=master)](https://travis-ci.org/Glavin001/grunt-pageshot)
 
 > Automate your screenshots with [Pageshot](https://github.com/Glavin001/pageshot).
 
