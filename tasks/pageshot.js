@@ -31,14 +31,14 @@ module.exports = function (grunt) {
     var p = pageshot(options.url, options.conf, options.output);
 
     // Print out live events
-    if (options.quite) {
+    if (!options.quite) {
       p.on('didShoot', function(options, successful) {
         var title = '"' + options.name + '.' + options.format + '" with ' + options.quality + ' quality.';
 
         if (successful) {
-          console.log(chalk.green('\n✔ ' + 'Successfully generated '+title));
+          grunt.log.writeln(chalk.green('\n✔ ' + 'Successfully generated '+title));
         } else {
-          console.log(chalk.red('\n✘ ' + 'Failed to generate '+title));
+          grunt.log.writeln(chalk.red('\n✘ ' + 'Failed to generate '+title));
         }
       });
     }
