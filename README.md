@@ -1,6 +1,6 @@
-# grunt-pageshot
+# [grunt-pageshot](https://github.com/Glavin001/grunt-pageshot)
 
-> Automate your screenshots with Pageshot.
+> Automate your screenshots with [Pageshot](https://github.com/Glavin001/pageshot).
 
 ## Getting Started
 This plugin requires Grunt.
@@ -37,17 +37,29 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.url
+Type: `String`  
+Required  
 
-A string value that is used to do something with whatever.
+The URL to open.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.conf
+Type: `String`  
+Required  
 
-A string value that is used to do something else with whatever else.
+The path to the Pageshot configuration script.
+
+#### options.output
+Type: `String`  
+Required  
+
+Output directory for screenshot files.
+
+#### options.viewportSize
+Type: `Object`
+Default value: `{ width: 480, height: 800}`
+
+The initial `viewportSize`.
 
 ### Usage Examples
 
@@ -89,4 +101,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 _(Nothing yet)_
 
 ## License
-Copyright (c) 2014 Glavin Wiechert. Licensed under the MIT license.
+Copyright (c) 2014 [Glavin Wiechert](https://github.com/Glavin001).  
+Licensed under the MIT license.
